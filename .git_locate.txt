@@ -1,0 +1,4 @@
+link: git remote add origin https://github.com/andreGarvin/zips.git
+link to push/command: 
+	~ git remote add origin https://github.com/andreGarvin/zips.git
+	~ git push -u origin master
