@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>zips</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+        <style type="text/css">
+            div a {
+                margin: 10px;
+            }
+            .bin {
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                padding: 20px;
+                margin: 40px 0px 0px 60px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="navbar navbar-default navbar-static-top">
+            <a href='/' class="btn btn-primary pull-left"> Home page </a>
+        </div>
+        
+        <div class="bin col-md-5 col-xs-5">
+            <h3> file-key: {{ resp['file_key'] }} </h3>
+            
+            <h3 id='title'> {{ resp['file_name'] }} </h3>
+            <p class='pull-right'> {{ resp['date'] }} </p>
+            <p> FIle size: {{ resp['file_size'] }} </p>
+            
+            <a href="https://my-projects-andregarvin.c9users.io/download?k={{ resp['file_key'] }}" class="download btn btn-default pull-right" type='button'> download </a>
+        </div>
+        
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+        <!--    <script type="text/javascript">-->
+        <!--        $(document).ready(function() {-->
+                    
+        <!--            $('.download').click(function() {-->
+        <!--                alert('Downloaded: ' + $('#title').html());-->
+                        
+        <!--                $.ajax({-->
+        <!--                    type: 'GET',-->
+        <!--                    url: 'https://my-projects-andregarvin.c9users.io/download?k=' + $(this).attr('id')-->
+        <!--                });-->
+                        
+        <!--            });-->
+                    
+        <!--        });-->
+        <!--    </script>-->
+    </body>
+</html>

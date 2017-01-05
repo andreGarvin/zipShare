@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>zips</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+        <style type="text/css">
+            div .btn {
+                margin: 10px;
+            }
+            .bin {
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                padding: 20px;
+                margin: 30px 60px 0px 0px;
+            }
+            input {
+                margin: 20px 0px 20px 0px;
+            }
+            .form-group {
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="navbar navbar-default navbar-static-top">
+            <button id='open' class="btn btn-primary pull-left">Open zip</button>
+        </div>
+        
+        <div class="container-fluid">
+            <div class="row">
+                
+                <p class="lead bg-info col-md-12 col-xs-12">
+                    Zips is a per to per file transferring web application that allows users to publish a file to be downloaded for a certain amount of time and expires when that time is up.
+                    Users can upload and download text files, documents, PDF's, JPG or PNG ( images ), and some good dank memes.
+                    <br/>
+                    <strong>
+                        <i>
+                            try it now.
+                        </i>
+                    </strong>
+                </p>
+                
+                <form method='POST' action='/' enctype="multipart/form-data">
+                    <div class="bin col-md-5 col-xs-7 form-group">
+                        
+                        <label for="inputFile"> Upload a file </label>
+                        <input type="file" name="inputFile" />
+                        
+                        <select class="form-control" name='time'>
+                            <option>5 mins</option>
+                            <option>10 mins</option>
+                            <option>30 mins</option>
+                            <option>1 hr</option>
+                        </select>
+                    
+                        <input type="submit" class='btn btn-default pull-right' value="Publish zip" />
+                    </div>
+                </form>
+                
+                {% if resp.len != 0 %}
+                    <div class="bin col-md-3 col-xs-3">
+                        <h3> Active zip Keys: </h3>
+                        {% for k in resp.activeKeys %}
+                            <p>
+                                <a href="https://my-projects-andregarvin.c9users.io/{{ k.file_key }}" class="lead"> {{ k.file_key }} </a>
+                            </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            
+            $('#open').click(function() {
+                
+                var key = prompt('Put in zip key: enter key.');
+                
+                if ( key ) {
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: 'https://my-projects-andregarvin.c9users.io/' + key,
+                        success: function( resp ) {
+                            
+                            if ( resp.status === null ) {
+                                alert( resp.msg );
+                            }
+                            else {
+                                window.open(resp.msg, '_self');
+                            }
+                        }
+                    });
+                    
+                }
+            
+            });
+            
+        });
+        </script>
+    </body>
+</html>
