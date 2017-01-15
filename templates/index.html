@@ -91,6 +91,41 @@
         <script src='https://unpkg.com/vue/dist/vue.js'></script>
         <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+        <script type="text/javascript">
+            var app = new Vue({
+    el: '#app',
+    data: {
+        seen: false,
+        feedback: {
+            key: '',
+            msg: ''
+        }
+    },
+    methods: {
+        open_zip: function() {
+            var key = prompt('Enter zip Key');
+            
+            if ( key ) {
+                // Send a POST request
+                axios.post('/'+ key)
+                    .then(function( resp ) {
+                        console.log( resp );
+                    });
+                
+            }
+        },
+        send_feedback: function(){
+            // Send a POST request
+            axios.post({
+                method: 'post',
+                url: '/feedback/' + app.feedback.key +'&msg=' + app.feedback.msg,
+            });
+        },
+        show_feedbox: function() {
+            return this.seen = !( this.seen );
+        }
+    }
+});
+        </script>
     </body>
 </html>
