@@ -1,4 +1,4 @@
-# zips: making sharing per to per easier
+# zips: making per to per file sharing easier
 
 ## What is zip?
 ### zips is a per to per file transfering web applofation. This application allows users upload any file they have on their local computer for a certain amount of time making its accessabe to download it from anyowhere they are in the world.
