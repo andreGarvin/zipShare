@@ -88,35 +88,29 @@ def GETdoc( key ):
     
     # check()
     
-    if key == 'TEST':
-        return 'no key'
+    if request.method == 'POST':
+        
+        for i in db['activeKeys']['keys']:
+        
+            if i['file_key'].lower() == key.lower():
+                
+                return jsonify({ 'msg': '/' + key.lower(), 'status': True })
+        
+        # check()
+        return jsonify({ 'msg': 'Key not found or is expired.', 'status': None })
     
-    else:
-        
-        if request.method == 'POST':
-            
-            for i in db['activeKeys']['keys']:
-            
-                if i['file_key'].lower() == key.lower():
-                    
-                    return jsonify({ 'msg': 'https://my-projects-andregarvin.c9users.io/' + key.lower(), 'status': True })
-            
-            # check()
-            return jsonify({ 'msg': 'Key not found or is expired.', 'status': None })
-        
-        
-        elif request.method == 'GET':
     
-            for i in db['activeKeys']['keys']:
-            
-                if i['file_key'].lower() == key.lower():
-                    
-                    # check()
-                    return render_template('download.html', resp={ 'file_name': i['file_name'], 'file_size': i['file_size'], 'date': i['date'], 'file_key': key.lower() })
-            
-            # check()
-            return jsonify({ 'msg': 'Key-file is not active anymore or does not exist.', 'status': False })
-            # render_template('error.html', resp='Key-file is not active anymore or does not exist.')
+    elif request.method == 'GET':
+    
+        for i in db['activeKeys']['keys']:
+        
+            if i['file_key'].lower() == key.lower():
+                
+                # check()
+                return render_template('download.html', resp={ 'file_name': i['file_name'], 'file_size': i['file_size'], 'date': i['date'], 'file_key': key.lower() })
+        
+        # check()
+        return jsonify({ 'msg': 'Key-file is not active anymore or does not exist.', 'status': False })
 
 @app.route('/download')
 def download():

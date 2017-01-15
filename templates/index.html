@@ -4,6 +4,9 @@
         <title>zips</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
         <style type="text/css">
+            .navbar {
+                margin-bottom: 0px;
+            }
             div .btn {
                 margin: 10px;
             }
@@ -23,10 +26,11 @@
         </style>
     </head>
     <body>
+        <div id="app">
         
         <div class="navbar navbar-default navbar-static-top">
-            <button id='open' class="btn btn-primary pull-left">Open zip</button>
-            <button class="btn  btn-warning pull-right" id="feedback"> feedback </button>
+            <button @click='open_zip' class="btn btn-primary pull-left">Open zip</button>
+            <button @click='show_feedbox' class="btn  btn-warning pull-right"> feedback </button>
         </div>
         
         <div class="container-fluid">
@@ -44,7 +48,7 @@
                 </p>
                 
                 <form method='POST' action='/' enctype="multipart/form-data">
-                    <div class="bin col-md-5 col-xs-7 form-group">
+                    <div class="bin col-md-5 col-xs-6 form-group">
                         
                         <label for="inputFile"> Upload a file </label>
                         <input type="file" name="inputFile" />
@@ -73,70 +77,20 @@
                 
             </div>
             
-            <div style='display: none' class="bin col-md-4 col-xs-4" id="section">
+            <div v-if='seen' class="bin col-md-4 col-xs-6" id="section">
                 
                 <p class="lead">Feedback</p>
-                <input type="text" class="form-control" id="key" placeholder='Key' />
-                <input type="text" class="form-control" id="msg" placeholder='message' />
+                <input type="text" class="form-control" v-model="feedback.key" placeholder='Key' />
+                <input type="text" class="form-control" v-model="feedback.msg" placeholder='message' />
                 
-                <button class="btn btn-default pull-right" id="send"> send </button>
-                <button class="btn btn-danger pull-right" id="cancel"> exit </button>
+                <button class="btn btn-default pull-right" @click="send_feedback"> send </button>
+                <button class="btn btn-danger pull-right" @click="show_feedbox"> exit </button>
             </div>
         </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $('#feedback').click(function() {
-                
-                $('#section').show();
-            
-                $('#send').click(function() {
-                    
-                    $.ajax({
-                        type: 'POST',
-                        url: '/feedback/' + $('#key').val() + '?msg='+ $('#msg').val(),
-                        success: function( resp ) {
-                            
-                            console.log( resp.msg );
-                        },
-                        error: function() {
-                            alert('no fam!');
-                        }
-                    });
-                });
-                
-                $('#cancel').click(function() {
-                    $('#section').hide();
-                });
-                
-            });
-            
-            $('#open').click(function() {
-                
-                var key = prompt('Put in zip key: enter key.');
-                
-                if ( key ) {
-                    
-                    $.ajax({
-                        type: 'POST',
-                        url: 'https://my-projects-andregarvin.c9users.io/' + key,
-                        success: function( resp ) {
-                            
-                            if ( resp.status === null ) {
-                                alert( resp.msg );
-                            }
-                            else {
-                                window.open(resp.msg, '_self');
-                            }
-                        }
-                    });
-                    
-                }
-            
-            });
-            
-        });
-        </script>
+        </div>
+        <script src='https://unpkg.com/vue/dist/vue.js'></script>
+        <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
