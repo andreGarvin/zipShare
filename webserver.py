@@ -81,7 +81,9 @@ def home():
     # check()
     return render_template('index.html', resp={ 'activeKeys': db['activeKeys']['keys'], 'len': db['activeKeys']['count'] })
 
-
+@app.route('/demo')
+def demo():
+    return jsonify( db )
 
 @app.route('/<key>', methods=['GET', 'POST'])
 def GETdoc( key ):
