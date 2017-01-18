@@ -6,7 +6,7 @@
 ## How does it work?
 ### When a user opens the website in any browser they are in  they can press the open key button which prompts them for a key to route them to the download page where the file is being hosted on file.
 ### Or if you want to be fancy you can change the url path in the broswer
-    ### EX: https:/zips.com/car     [ cat=r is the key ].
+    ### EX: https:/zips.com/car     [ cat= is the key to the downloadable file ].
 ### to the file or 'zip key' that will direct you to the download page where the file is file is located.
 ### Both methods searching for its works.
 
