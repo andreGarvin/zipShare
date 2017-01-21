@@ -17,3 +17,14 @@ input {
 .form-group {
     margin-left: 20px;
 }
+
+div a {
+    margin: 10px;
+}
+.bin {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 20px;
+    margin: 40px 0px 0px 60px;
+}
