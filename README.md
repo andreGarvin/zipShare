@@ -1,7 +1,7 @@
 # zipz: making per to per file sharing easier
 
 ## What is zipz?
-### zips is a per to per file transfering web applofation. This application allows users upload any file they have on their local computer for a certain amount of time making its accessible to download it from anyowhere they are in the world.
+### zipz is a per to per file transfering web applofation. This application allows users upload any file they have on their local computer for a certain amount of time making its accessible to download it from anyowhere they are in the world.
 
 ## How does it work?
 ### When a user opens the website in any browser they are in  they can press the open key button which prompts them for a key to route them to the download page where the file is being hosted on file.
