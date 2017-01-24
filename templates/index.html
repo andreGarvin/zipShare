@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>zips</title>
+        <title>zipShare</title>
+        <link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-        <link rel= "stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}" />
     </head>
     <body>
+        
+        
         <div id="app">
         
-        <div class="navbar navbar-default navbar-static-top">
-            <button @click='open_zip' class="btn btn-primary pull-left">Open zip</button>
-            <button @click='show_feedbox' class="btn  btn-warning pull-right"> feedback </button>
+            <!-- navbar -->
+            <div class="navbar navbar-default navbar-static-top">
+                
+                <div class="col-md-3 col-xs-5 pull-right">
+                    <div class="row group">
+                        <a class='btn btn-default' href="https://www.google.com"> sign up </a>
+                        <a class='lead' href="https://www.google.com">login</a>
+                    </div>
+                </div>
+                
+                <!-- brand -->
+                <h1 class="col-md-2">zipShare</h1>
+            </div>
+    
+    
+            <div class="container-fluid">
+                <button @click='open_zip' class="btn btn-primary">open zip</button>
+                    
+                    <div class="row">
+                        <div class="bin col-md-5 col-xs-9 form-group col-md-offset-3 col-xs-offset-2">
+                            <label for="inputFile">
+                                <h3>Upload a file</h3>
+                            </label>
+                            
+                            <input type="file" name="inputFile" />
+                            
+                            <select class="form-control" name='time'>
+                              <option>5 mins</option>
+                              <option>10 mins</option>
+                              <option>15 mins</option>
+                              <option>20 mins</option>
+                              <option>25 mins</option>
+                              <option>30 mins</option>
+                            </select>
+
+                            <input type="submit" class='btn btn-default pull-right btn-lg' value="Publish zip" />
+                        </div>
+                        
+                        {% if resp.len != 0 %}
+                            <div class="bin col-md-3 col-xs-3">
+                                <h3> Active zip Keys: </h3>
+                                {% for k in resp.activeKeys %}
+                                    <p>
+                                        <a href="https://my-projects-andregarvin.c9users.io/{{ k.file_key }}" class="lead"> {{ k.file_key }} </a>
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                
+                        <p @clikc='show_feedbox' class='col-xs-offset-10 col-md-offset-7'>feedback</p>
+                        
+                        <div v-if='seen' style='margin-top: 20px; padding: 12px' class="bin col-xs-7 col-md-4 col-xs-offset-3 col-md-offset-7">
+                            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            
+                            <h3 class='text-center'>feedback</h3>
+                            
+                            <input type="text" class="form-control" v-model="feedback.key" placeholder='key (optional)' />
+                            <input type="text" class="form-control" v-model="feedback.msg" placeholder='message' />
+                            
+                            <button @click="send_feedback" class="btn btn-primary pull-right">submit feedback</button>
+                        </div>
+                        
+                    </div>
+            </div>
         </div>
         
-        <div class="container-fluid">
-            <div class="row">
-                
-                <p class="lead bg-info col-md-12 col-xs-12">
-                    Zips is a per to per file transferring web application that allows users to publish a file to be downloaded for a certain amount of time and expires when that time is up.
-                    Users can upload and download text files, documents, PDF's, JPG or PNG ( images ), and some good dank memes.
-                    <br/>
-                    <strong>
-                        <i>
-                            try it now.
-                        </i>
-                    </strong>
-                </p>
-                
-                <form method='POST' action='/' enctype="multipart/form-data">
-                    <div class="bin col-md-5 col-xs-6 form-group">
-                        
-                        <label for="inputFile"> Upload a file </label>
-                        <input type="file" name="inputFile" />
-                        
-                        <select class="form-control" name='time'>
-                            <option>5 mins</option>
-                            <option>10 mins</option>
-                            <option>30 mins</option>
-                            <option>1 hr</option>
-                        </select>
-                    
-                        <input type="submit" class='btn btn-default pull-right' value="Publish zip" />
-                    </div>
-                </form>
-                
-                {% if resp.len != 0 %}
-                    <div class="bin col-md-3 col-xs-3">
-                        <h3> Active zip Keys: </h3>
-                        {% for k in resp.activeKeys %}
-                            <p>
-                                <a href="https://my-projects-andregarvin.c9users.io/{{ k.file_key }}" class="lead"> {{ k.file_key }} </a>
-                            </p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                
-            </div>
-            
-            <div v-if='seen' class="bin col-md-4 col-xs-6" id="section">
-                
-                <p class="lead">Feedback</p>
-                <input type="text" class="form-control" v-model="feedback.key" placeholder='Key' />
-                <input type="text" class="form-control" v-model="feedback.msg" placeholder='message' />
-                
-                <button class="btn btn-default pull-right" @click="send_feedback"> send </button>
-                <button class="btn btn-danger pull-right" @click="show_feedbox"> exit </button>
-            </div>
-        </div>
-        </div>
         
         <script src='https://unpkg.com/vue/dist/vue.js'></script>
         <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
@@ -75,3 +83,13 @@
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
+
+<!--<p class="lead bg-info col-md-12 col-xs-12">-->
+                <!--    Zipz is a per to per file transferring web application that allows users to publish a file to be downloaded for a certain amount of time and expires when that time is up.-->
+                <!--    Users can upload and download text files, documents, PDF's, JPG or PNG ( images ), and some good dank memes.-->
+                <!--    <strong>-->
+                <!--        <i>-->
+                <!--            try it now.-->
+                <!--        </i>-->
+                <!--    </strong>-->
+                <!--</p>-->
