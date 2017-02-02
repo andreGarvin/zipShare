@@ -122,5 +122,15 @@ def feedback( key ):
     
     return jsonify({ 'msg': 'messge was not stored', 'status': False })
 
+@app.route('/db')
+def admin():
+    ak = request.args.get('k')
+    
+    if ak == os.environ['admin_key']:
+        return jsonify( db )
+    else:
+         return jsonify({ 'error': 'invalid', 'status': None })
+
+
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)),debug=True)
