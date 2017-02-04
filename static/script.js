@@ -9,6 +9,7 @@ var app = new Vue({
             msg: ''
         }
     },
+    
     methods: {
         
         open_zip: function() {
