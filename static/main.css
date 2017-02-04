@@ -6,6 +6,10 @@
     color: #0077b3;
 }
 
+.navbar .btn {
+    margin: 20px;
+}
+
 .group {
   margin: 17px;
 }
@@ -18,17 +22,22 @@
     padding: 20px;
 }
 
+.bin input {
+    margin-bottom: 20px;
+    margin-top: 10px
+}
+
+
 .bin .btn {
     margin-top: 20px;
 }
 
-.bin input {
-    margin-bottom: 20px;
-    margin-top: 20px
+div p {
+    color: #0077b3;4
+    cursor: pointer;
 }
 
-
-#app .btn {
+#feedback {
     margin-top: 20px;
+    padding: 12px;
 }
-

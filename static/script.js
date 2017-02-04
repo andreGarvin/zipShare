@@ -20,7 +20,10 @@ var app = new Vue({
                 // Send a POST request
                 axios.post('/'+ key)
                     .then(function( resp ) {
-                        console.log( resp );
+                        if ( resp.data.status !== null )
+                            alert( resp.data.msg );
+                        else
+                            window.open( resp.data.msg , '_blank' );
                     });
                 
             }
@@ -31,12 +34,8 @@ var app = new Vue({
             // Send a POST request
             axios.post({
                 method: 'post',
-                url: '/feedback?key=' + app.feedback.key + '&msg=' + app.feedback.msg,
+                url: '/feedback?msg=' + app.feedback.msg,
             });
-        },
-        
-        show_feedbox: function() {
-            return this.seen = !( this.seen );
         }
     }
 });
