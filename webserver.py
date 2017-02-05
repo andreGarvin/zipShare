@@ -4,9 +4,11 @@ from time import gmtime, strftime       # time stamp
 from random import randint              # random moduel
 from io import BytesIO                  # upload and download
 import os                               # operating system
+import json
 
 # start app
 app = Flask(__name__)
+
 
 # this is 'fake db'
 db = {
@@ -22,7 +24,7 @@ db = {
 # upload and homepage route
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    
+
     # if it is a post method
     if request.method == 'POST':
     
