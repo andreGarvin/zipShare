@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>zipShare</title>
+        <title>zipshare</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
         <!--<link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" />-->
         <style type="text/css">
@@ -9,16 +9,17 @@
                 margin-bottom: 0px;
             }
             
-            .navbar h1 {
+            .navbar h1, #login {
                 color: #0077b3;
             }
             
-            .navbar .btn {
+            .navbar .zip {
                 margin: 20px;
             }
             
             .group {
-              margin: 17px;
+                border-left: 1px solid #ddd;
+                padding: 20px;
             }
             
             .bin {
@@ -44,6 +45,10 @@
                 color: #0077b3;
             }
             
+            div p:hover {
+                text-decoration: underline;
+            }
+            
             #feedback {
                 margin-bottom: 20px;
                 margin-top: 20px;
@@ -60,8 +65,14 @@
             <div class="navbar navbar-default navbar-static-top">
                 <!-- brand -->
                 <h1 class='col-md-3 col-xs-3'>zipShare</h1>
+                
+                <div class="group col-xs-4 col-md-2 pull-right">
+                    <button class="btn btn-default pull-right">sing up</button>
+                    <p class='lead' id='login'>login</p>
+                </div>
+                
                 <!-- open key button -->
-                <button @click='open_zip' class="btn btn-primary pull-right">open zip</button>
+                <button @click='open_zip' class="zip btn btn-primary pull-right">open zip</button>
             </div>
     
     
@@ -111,7 +122,50 @@
         <script src='https://unpkg.com/vue/dist/vue.js'></script>
         <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>-->
+        <script type="text/javascript">
+            var app = new Vue({
+                el: '#app',
+    
+                data: {
+                    seen: false,
+                    feedback: {
+                        key: '',
+                        msg: ''
+                    }
+                },
+                methods: {
+        
+                    open_zip: function() {
+                        
+                        var key = prompt('Enter zip Key');
+                        
+                        if ( key ) {
+                            
+                            // Send a POST request
+                            axios.post('/'+ key)
+                                .then(function( resp ) {
+                                    if ( resp.data.status !== null )
+                                        window.open( resp.data.msg , '_blank' );
+                                    else
+                                        alert( resp.data.msg );
+                                });
+                            
+                        }
+                    },
+                    
+                    send_feedback: function(){
+                        var app = this;
+                        // Send a POST request
+                        axios.post({
+                            method: 'post',
+                            url: '/feedback?key='+ app.feedback.key +'&msg=' + app.feedback.msg,
+                        });
+                    }
+                }
+            });
+
+        </script>
     </body>
 </html>
 

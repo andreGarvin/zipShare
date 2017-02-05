@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, jsonify, send_file # server
+# server
+from flask import Flask, request, render_template, jsonify, send_file, redirect, url_for
 from time import gmtime, strftime       # time stamp
 from random import randint              # random moduel
 from io import BytesIO                  # upload and download
@@ -111,17 +112,27 @@ def download():
 
 
 # feedback route
-@app.route('/feedback', methods=['POST'])
-def feedback( key ):
+@app.route('/zipshare/feedback/', methods=['POST', 'GET'])
+def feedback():
     
-    # the msg f the feedback
-    msg = request.args.get('msg')
     
-    # appends the feeback msg
-    db['feedback'].append(msg)
+    # the use makes a post request
+    if request.method == 'POST':
+        
+        # the 'msg'and 'key'(optional) from a feedback
+        msg = request.args.get('msg')
+        key = request.args.get('key')
     
-    # then retuns back of the msg and the status in json format
-    return jsonify({ 'msg': msg, 'status': True })
+    
+        # appends the feeback msg
+        db['feedback'].append(msg)
+        
+        # then retuns back of the msg and the status in json format
+        return jsonify({ 'msg': msg, 'status': True })
+    
+    # the use makes a post request
+    elif request.method == 'GET':
+        return redirect( url_for('home') )
 
 
 # starts the webserver
