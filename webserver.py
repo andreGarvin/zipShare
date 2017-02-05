@@ -127,13 +127,11 @@ def feedback():
         msg = request.args.get('msg')
         key = request.args.get('key')
     
-    
-        # appends the feeback msg
-        db['feedback'].append(msg)
         
+        # appends the feeback msg
         # then retuns back of the msg and the status in json format
-        return jsonify({ 'msg': msg, 'status': True })
-    
+        return db['feedback']({ 'msg': msg, 'key': key,  'status': True })
+        
     # the use makes a post request
     elif request.method == 'GET':
         return redirect( url_for('home') )
