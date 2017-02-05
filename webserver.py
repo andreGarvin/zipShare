@@ -5,6 +5,7 @@ from random import randint              # random moduel
 from io import BytesIO                  # upload and download
 import os                               # operating system
 
+
 # start app
 app = Flask(__name__)
 
@@ -25,36 +26,37 @@ def home():
     
     # if it is a post method
     if request.method == 'POST':
-    
+        
         # uploaded file data
         file = request.files['inputFile']
         content = file.read()   # reads the file content
         
-        # file object/dictionary
-        POST_data = {
-            'end_time': request.form.get('time')[0:1],
-            'file_name': file.filename,
-            'content': content,
-            'file_size': len( content ),
-            'file_key': db['word_bank'][randint(0, len( db['word_bank'] )  - 1 )],
-            'date': strftime("%a, %d %b %Y %H:%M", gmtime()),
-        }
+        if len( file.filename ) != 0:
+            # file object/dictionary
+            POST_data = {
+                'end_time': request.form.get('time')[0:1],
+                'file_name': file.filename,
+                'content': content,
+                'file_size': len( content ),
+                'file_key': db['word_bank'][randint(0, len( db['word_bank'] )  - 1 )],
+                'date': strftime("%a, %d %b %Y %H:%M", gmtime()),
+            }
         
-        # checkd to see if the file_key is not in use or been assigned        
-        for j in db['activeKeys']['keys']:
-        # if the file key that was assigned is in use then reasign the file_key
-            while j['file_key'] == POST_data['file_key']:
-                
-                POST_data['file_key'] = db['word_bank'][randint(0, len( db['word_bank'] )  - 1 )]
+            # checkd to see if the file_key is not in use or been assigned        
+            for j in db['activeKeys']['keys']:
+            # if the file key that was assigned is in use then reasign the file_key
+                while j['file_key'] == POST_data['file_key']:
+                    
+                    POST_data['file_key'] = db['word_bank'][randint(0, len( db['word_bank'] )  - 1 )]
         
-        # incremnt to number active keys 
-        # and appened the new key into active key
-        db['activeKeys']['count'] += 1
-        db['activeKeys']['keys'].append( POST_data )
+            # incremnt to number active keys 
+            # and appened the new key into active key
+            db['activeKeys']['count'] += 1
+            db['activeKeys']['keys'].append( POST_data )
+            
+            # then redirect the user to the download page
+            return render_template('download.html', resp={ 'file_name': POST_data['file_name'], 'file_size': len( content ), 'date': POST_data['date'], 'file_key': POST_data['file_key'] })
         
-        # then redirect the user to the download page
-        return render_template('download.html', resp={ 'file_name': POST_data['file_name'], 'file_size': len( content ), 'date': POST_data['date'], 'file_key': POST_data['file_key'] })
-    
     # if the user just makes a get metjod send the homepage
     return render_template('index.html', resp={ 'activeKeys': db['activeKeys']['keys'], 'len': db['activeKeys']['count'] })
 
