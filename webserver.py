@@ -4,7 +4,6 @@ from time import gmtime, strftime       # time stamp
 from random import randint              # random moduel
 from io import BytesIO                  # upload and download
 import os                               # operating system
-import json
 
 
 # start app
