@@ -1,5 +1,4 @@
 from time import gmtime, strftime       # time stamp
-import sys
 
 def set_time( end_time ):
     
