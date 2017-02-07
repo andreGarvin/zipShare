@@ -157,10 +157,7 @@
                     send_feedback: function(){
                         var app = this;
                         // Send a POST request
-                        axios.post({
-                            method: 'post',
-                            url: '/feedback?key='+ app.feedback.key +'&msg=' + app.feedback.msg,
-                        });
+                        axios.post('/zipshare/feedback/?key='+ app.feedback.key +'&msg=' + app.feedback.msg)
                     }
                 }
             });
