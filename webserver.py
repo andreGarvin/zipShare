@@ -6,12 +6,15 @@ from random import randint              # random moduel
 from io import BytesIO                  # upload and download
 import os                               # operating system
 
-
+# my script files
+from ziptime import *
+# from watch_db import *
 
 # start app
 app = Flask(__name__)
 client = MongoClient('localhost', 27017)
 db = client.zipshare
+
 
 # upload and homepage route
 @app.route('/', methods=['GET', 'POST'])
@@ -31,7 +34,7 @@ def home():
             
             # file object/dictionary
             POST_data = {
-                'end_time': request.form.get('time'),
+                'end_time': set_time( request.form.get('time') ),
                 'file_name': file.filename,
                 'content': content,
                 'file_size': len( content ),
@@ -49,14 +52,12 @@ def home():
             # and appened the new key into active key
             db.docshare.insert_one( POST_data )
             
-            # db['activeKeys']['count'] += 1
-            # db['activeKeys']['keys'].append( POST_data )
-            
             # then redirect the user to the download page
             return render_template('download.html', resp={ 'file_name': POST_data['file_name'], 'file_size': len( content ), 'date': POST_data['date'], 'file_key': POST_data['file_key'] })
         
     # if the user just makes a get metjod send the homepage
     return render_template('index.html', resp={ 'activeKeys': db['activeKeys']['keys'], 'len': db['activeKeys']['count'] })
+
 
 
 # displaying the download html page 
