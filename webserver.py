@@ -68,7 +68,7 @@ def GETdoc( key ):
     if request.method == 'POST':
         
         # send them back the jsn url route to the route it is on
-        for i in db['activeKeys']['keys']:
+        for i in db.docshare.find():
         
             if i['file_key'].lower() == key.lower():
                 
@@ -83,7 +83,7 @@ def GETdoc( key ):
     
         # then redirects the user to the front download page
         # goes through each key
-        for i in db['activeKeys']['keys']:
+        for i in db.docshare.find():
             
             if i['file_key'].lower() == key.lower():
                 
@@ -103,7 +103,7 @@ def download():
     req_file = request.args.get('k')
     
     # go through each key to find the downloadable file
-    for i in db['activeKeys']['keys']:
+    for i in db.docshare.find():
         
         # i fpound it starts to download
         if i['file_key'] == req_file:
@@ -137,7 +137,7 @@ def feedback():
     elif request.method == 'GET':
         return redirect( url_for('home') )
 
-
+os.system('python watch_db.py &')
 # starts the webserver
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)),debug=True)
