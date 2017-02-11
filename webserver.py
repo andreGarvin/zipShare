@@ -105,10 +105,6 @@ def download():
     
     # go through each key to find the downloadable file
     for i in db.docshare.find():
-<<<<<<< HEAD
-=======
-        print i
->>>>>>> dev
         
         # i found it starts to download
         if i['file_key'] == req_file:
