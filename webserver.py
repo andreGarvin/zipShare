@@ -8,7 +8,6 @@ import os                               # operating system
 
 # my script files
 from ziptime import *
-# from watch_db import *
 
 # start app
 app = Flask(__name__)
