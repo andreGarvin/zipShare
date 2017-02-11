@@ -21,7 +21,7 @@ db = client.zipshare
 def home():
     
     # wordbank fr the redirect urls
-    word_bank = [ 'pillow', 'house', 'cat', 'key', 'dogs', 'umbrella', 'brother', 'car', 'spider', 'kill', 'code', 'snap', 'sister', 'paper', 'gutair', 'icon', 'tree', 'leaf', 'master', 'bird', 'phone', 'bottle', 'snake', 'bot', 'teeth', 'bite', 'data', 'react', 'cover', 'coat', 'goat', 'disc', 'vinyl', 'book', 'wallet', 'computer', 'cards', 'bob', 'baby', 'mario', 'classroom' ]
+    word_bank = [ 'pillow', 'house', 'cat', 'key', 'dogs', 'umbrella', 'brother', 'car', 'spider', 'kill', 'code', 'snap', 'sister', 'paper', 'gutiar', 'icon', 'tree', 'leaf', 'master', 'bird', 'phone', 'bottle', 'snake', 'bot', 'teeth', 'bite', 'data', 'react', 'cover', 'coat', 'goat', 'disc', 'vinyl', 'book', 'wallet', 'computer', 'cards', 'bob', 'baby', 'mario', 'classroom' ]
     
     # if it is a post method
     if request.method == 'POST':
@@ -46,7 +46,8 @@ def home():
             for j in db.docshare.find():
                 # if the file key that was assigned is in use then reasign the file_key
                     while j['file_key'] == POST_data['file_key']:
-                        POST_data['file_key'] = db['word_bank'][randint(0, len( fake_db['word_bank'] )  - 1 )]
+                        
+                        POST_data['file_key'] = word_bank[randint(0, len( word_bank )  - 1 )]
         
             # incremnt to number active keys 
             # and appened the new key into active key
@@ -68,7 +69,7 @@ def GETdoc( key ):
     if request.method == 'POST':
         
         # send them back the jsn url route to the route it is on
-        for i in db['activeKeys']['keys']:
+        for i in db.docshare.find():
         
             if i['file_key'].lower() == key.lower():
                 
@@ -83,7 +84,7 @@ def GETdoc( key ):
     
         # then redirects the user to the front download page
         # goes through each key
-        for i in db['activeKeys']['keys']:
+        for i in db.docshare.find():
             
             if i['file_key'].lower() == key.lower():
                 
@@ -103,12 +104,13 @@ def download():
     req_file = request.args.get('k')
     
     # go through each key to find the downloadable file
-    for i in db['activeKeys']['keys']:
+    for i in db.docshare.find():
+        print i
         
-        # i fpound it starts to download
+        # i found it starts to download
         if i['file_key'] == req_file:
             
-            return send_file( BytesIO( i['content'] ), attachment_filename=i['file_name'], as_attachment=True )
+            return send_file( BytesIO( i['content'].encode('utf-8') ), attachment_filename=i['file_name'], as_attachment=True )
     
     # else it returns back a json error meg
     return jsonify({ 'msg': 'error', 'status': None })
