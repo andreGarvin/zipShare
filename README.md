@@ -20,6 +20,6 @@
 #### The entire backend of this application is buit with python using the flask module and mongodb as my NoSQL database option.
 
 ## challeneges
-### One challenge that I ran into was being able to asyncously remove any downloadable file that ran put of time off the database without over runnig the CPU power and also disrupting the flask apllication. This was hard becasue i had to take a higher level thinking approrach, this was quiet diffcult nevertheless I evenutally successfuly carete this 'alogorthim' to perfrom this task withpout over running the CPU power.
+#### One challenge that I ran into was being able to asyncously remove any downloadable file that ran put of time off the database without over runnig the CPU power and also disrupting the flask apllication. This was hard becasue i had to take a higher level thinking approrach, this was quiet diffcult nevertheless I evenutally successfuly carete this 'alogorthim' to perfrom this task withpout over running the CPU power.
 ## contributors:
 #### andre Gravin ~> andreGarvin
