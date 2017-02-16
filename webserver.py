@@ -137,7 +137,6 @@ def feedback():
     elif request.method == 'GET':
         return redirect( url_for('home') )
 
-os.system('python watch_db.py &')
 # starts the webserver
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)),debug=True)

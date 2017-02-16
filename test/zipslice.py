@@ -23,7 +23,7 @@ with open('prog_log.txt','r') as f:
         print i, data_size
         raw_input()
         
-        i += data_size
+        i = data_size
     
     with open('data.json', 'w') as wf:
     

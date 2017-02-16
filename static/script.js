@@ -20,7 +20,7 @@ var app = new Vue({
                 
                 // Send a POST request
                 axios.post('/'+ key)
-                    .then(function( resp ) {
+                    .then( ( resp ) => {
                         if ( resp.data.status !== null )
                             alert( resp.data.msg );
                         else
