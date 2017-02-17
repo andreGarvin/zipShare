@@ -1,23 +1,20 @@
 var app = new Vue({
     el: '#app',
-    
     data: {
         seen: false,
-        
         feedback: {
             key: '',
             msg: ''
         }
     },
-    
+
     methods: {
-        
         open_zip: function() {
-            
+
             var key = prompt('Enter zip Key');
-            
+
             if ( key ) {
-                
+
                 // Send a POST request
                 axios.post('/'+ key)
                     .then( ( resp ) => {
@@ -26,17 +23,19 @@ var app = new Vue({
                         else
                             window.open( resp.data.msg , '_blank' );
                     });
-                
+
             }
         },
-        
         send_feedback: function(){
-            
-            // Send a POST request
-            axios.post({
-                method: 'post',
-                url: '/feedback?msg=' + app.feedback.msg,
-            });
+
+            if ( feedback.msg.length !== 0 )
+                // Send a POST request
+                axios.post({
+                    method: 'post',
+                    url: '/feedback?msg=' + app.feedback.msg,
+                });
+            else
+                alert('write a feedback please.');
         }
     }
 });
