@@ -1,4 +1,3 @@
-# server
 from flask import Flask, request, render_template, jsonify, send_file, redirect, url_for
 from time import gmtime, strftime       # time stamp
 from pymongo import MongoClient         # database 'mongodb' module
@@ -48,8 +47,10 @@ def home():
 
                         POST_data['file_key'] = word_bank[randint(0, len( word_bank )  - 1 )]
 
-            # incremnt to number active keys
-            # and appened the new key into active key
+            """
+                incremnt to number active keys
+                and appened the new key into active key
+            """
             db.docshare.insert_one( POST_data )
 
             # then redirect the user to the download page
@@ -127,16 +128,17 @@ def feedback():
         key = request.args.get('key')
 
 
-        # appends the feeback msg
-        # then retuns back of the msg and the status in json format
+        # appends the feeback msg then retuns back of the msg and the status in json format
         db.feedback.insert_one({ 'msg': msg, 'key': key,  'status': True })
 
-        return True
+        return jsonify({ 'resp': 'messsged sent', 'status': True })
 
     # the use makes a post request
     elif request.method == 'GET':
         return redirect( url_for('home') )
 
-# starts the webserver
+# starts the script
 if __name__ == '__main__':
+
+    # running python server
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)),debug=True)
