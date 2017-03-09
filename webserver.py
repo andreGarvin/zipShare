@@ -1,18 +1,20 @@
-# server
+# module for server
 from flask import Flask, request, render_template, jsonify, send_file, redirect, url_for
+
 from time import gmtime, strftime       # time stamp
 from pymongo import MongoClient         # database 'mongodb' module
 from random import randint              # random moduel
 from io import BytesIO                  # upload and download
 import os                               # operating system
 
-# my script files
-from ziptime import *
+
 
 # start app
 app = Flask(__name__)
+
+# mongodb connection
 client = MongoClient('localhost', 27017)
-db = client.zipshare
+db = client.zipshare # connection to db zipshare
 
 
 # upload and homepage route
@@ -33,7 +35,7 @@ def home():
             
             # file object/dictionary
             POST_data = {
-                'end_time': set_time( request.form.get('time') ),
+                'end_time': request.form.get('time'),
                 'file_name': file.filename,
                 'content': content,
                 'file_size': len( content ),

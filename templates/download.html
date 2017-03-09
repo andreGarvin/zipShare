@@ -53,7 +53,7 @@
             
             #feedback {
                 margin-bottom: 50px;
-                margin-top: 20px;
+                margin-top: 10px;
                 padding: 12px;
             }
         </style>   
@@ -67,7 +67,7 @@
         <div id='app' class="container-fuild">
             <div class="row">
                 
-                <div class="bin col-md-5 col-xs-5 col-md-offset-3 col-xs-offset-3">
+                <div class="bin col-md-5 col-xs-5 col-md-offset-2 col-xs-offset-2">
                     <h3> file-key: {{ resp['file_key'] }} </h3>
                     
                     <h3 id='title'> {{ resp['file_name'] }} </h3>
@@ -77,8 +77,8 @@
                     <a href="https://my-projects-andregarvin.c9users.io/download?k={{ resp['file_key'] }}" class="download btn btn-default pull-right" type='button'> download </a>
                 </div>
                 
-                <div class='col-xs-12 col-md-12'>
-                    <p @click='seen = !( seen )' class="col-md-offset-7 col-xs-offset-7">
+                <div id='feedback' class='col-xs-12 col-md-12'>
+                    <p @click='seen = !( seen )' class="col-md-offset-6 col-xs-offset-7">
                         feedback
                     </p>
                 </div>
