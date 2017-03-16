@@ -65,7 +65,7 @@ def GETdoc( key ):
     # the use makes a post request
     if request.method == 'POST':
 
-        # send them back the jsn url route to the route it is on
+        # send them back the json url route to the route it is on
         for i in db.docshare.find():
 
             if i['file_key'].lower() == key.lower():
