@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>zipshare</title>
-        
+
         <link rel="icon" href="https://blog.udemy.com/wp-content/uploads/2014/06/bigstock-Copyng-documents-from-folder-39049255-300x225.jpg" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
         <link rel= "stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" />
+<<<<<<< HEAD
         <!--<style type="text/css">-->
         <!--    .navbar {-->
         <!--        margin-bottom: 0px;-->
@@ -57,33 +58,50 @@
         <!--        padding: 12px;-->
         <!--    }-->
         <!--</style>    -->
+=======
+>>>>>>> 138b3b728f3e0708dba8c5750dd075e36db6cd28
     </head>
     <body>
-        
-        
+
+
         <div id="app">
-            
+
             <!-- navbar -->
             <div class="navbar navbar-default navbar-static-top">
                 <!-- brand -->
+<<<<<<< HEAD
                 <h1 class='col-md-3 col-xs-3'>zipShare</h1>
                 
+=======
+                <h1 class='col-md-3 col-xs-3'>zipshare</h1>
+
+                <!-- <div class="group col-xs-4 col-md-2 pull-right">
+                    <button class="btn btn-default pull-right">sing up</button>
+                    <p class='lead' id='login'>login</p>
+                </div> -->
+
+>>>>>>> 138b3b728f3e0708dba8c5750dd075e36db6cd28
                 <!-- open key button -->
                 <button @click='open_zip' class="btn btn-primary pull-right">open zip</button>
             </div>
-    
-    
+
+
             <div class="container-fluid">
-                    
+
                 <div class="row">
+<<<<<<< HEAD
                         
                     <form action='/' enctype="multipart/form-data" class="bin col-md-6 col-xs-9 form-group col-md-offset-3 col-xs-offset-2" method='POST'>
+=======
+
+                    <form action='/' enctype="multipart/form-data" class="bin col-md-6 col-xs-8 form-group col-md-offset-3 col-xs-offset-2" method='POST'>
+>>>>>>> 138b3b728f3e0708dba8c5750dd075e36db6cd28
                         <label for="inputFile">
                             <h3>Upload a file</h3>
                         </label>
-                        
+
                         <input type="file" name="inputFile" />
-                        
+
                         <select class="form-control" name='time'>
                           <option>5 mins</option>
                           <option>10 mins</option>
@@ -91,35 +109,41 @@
                           <option>30 mins</option>
                           <option>1 hr</option>
                         </select>
-    
+
                         <input type="submit" class='btn btn-default pull-right btn-lg' value="Publish zip" />
                     </form>
+
                     <div class='col-xs-12 col-md-12'>
+<<<<<<< HEAD
                         <p @click='seen = !( seen )' class="col-md-offset-8 col-xs-offset-10">
+=======
+                        <p style='cursor: pointer' @click='seen = !( seen )' class="col-md-offset-8 col-xs-offset-8">
+>>>>>>> 138b3b728f3e0708dba8c5750dd075e36db6cd28
                             feedback
                         </p>
                     </div>
-                    
+
                     <div id='feedback' v-if='seen' class="bin col-xs-7 col-md-4 col-xs-offset-3 col-md-offset-4">
                         <button @click='seen = false' type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        
+
                         <h3 class='text-center'>feedback</h3>
-                        
+
                         <input type="text" class="form-control" v-model="feedback.key" placeholder='key (optional)' />
                         <input type="text" class="form-control" v-model="feedback.msg" placeholder='message' />
-                        
+
                         <button @click="send_feedback" class="btn btn-primary pull-right">submit feedback</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
-        
+
+
         <script src='https://unpkg.com/vue/dist/vue.js'></script>
         <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+<<<<<<< HEAD
         <!--<script type="text/javascript">-->
         <!--    var app = new Vue({-->
         <!--        el: '#app',-->
@@ -160,5 +184,7 @@
         <!--    });-->
 
         <!--</script>-->
+=======
+>>>>>>> 138b3b728f3e0708dba8c5750dd075e36db6cd28
     </body>
 </html>
