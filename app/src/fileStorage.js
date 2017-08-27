@@ -40,12 +40,13 @@ export default class FileStorge {
                               }
                           }
                       }
-                      
+
                       if (!exist) {
                           const storageRef = firebase.storage().ref(`uploads/${ fileObj.file_name }`).put(fileObj.file)
                           storageRef.on('state_changed', storageObj => {
                                 var progressBar = document.getElementById('progressBar')
                                 progressBar.style.cssText = `width: ${ (storageObj.bytesTransferred / storageObj.totalBytes) * 100 }%`
+                                progressBar.innerHTML = (storageObj.bytesTransferred / storageObj.totalBytes) * 100;
                           },
                           (err) => reject(err),
                           () => {

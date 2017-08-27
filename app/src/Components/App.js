@@ -93,19 +93,24 @@ export default class App extends Component {
                     </div>
                     { this.state.uiMessage ? <UImessage className='bin col-xs-4 col-sm-4 col-md-4 col-xs-offset-1' message={ this.state.uiMessage } /> : '' }
                     <div className='col-xs-12 col-sm-12 col-md-12'>
-                        <Upload fileObj={this.state.fileObj} uploadFile={ this.uploadFile.bind(this) } getFile={ this.getFile.bind(this) } setTime={ this.setTime.bind(this) } />
-                        { this.state.queryAlias ? <Download queryAlias={ this.state.queryAlias } /> : '' }
-                        <div style={{ borderTop: '6px solid #fd6b2e' }} className='bin col-xs-6 col-sm-6 col-md-6 col-xs-offset-1'>
+                        <div className='col-xs-12 col-sm-12 col-md-12'>
+                            <Upload fileObj={this.state.fileObj} uploadFile={ this.uploadFile.bind(this) } getFile={ this.getFile.bind(this) } setTime={ this.setTime.bind(this) } />
+                            { this.state.queryAlias ? <Download queryAlias={ this.state.queryAlias } /> : '' }
+                        </div>
+                        <div style={{ borderTop: '6px solid #fd6b2e', marginBottom: '20px' }} className='bin col-xs-11 col-sm-11 col-md-6 col-xs-offset-1'>
                             <h3>This is zipshare, this is a website for people to share files,
                             images, or anythin on your phone or latop over the interne for a
                             certian amount of time.</h3>
+
                             <h3>For example, Lets say if you want to share a file on your computer
-                            but you do not feel like getting everyones information, set permissions,
-                            or you just share everyone wo have there own version.</h3>
-                            <h3>Benefit, You its easy to uppload a file, wasy to download a file,
-                            just simply press the get file button, provide th alias name that is
-                            attached to the downloadable content, then press downlaod, and bam
-                            that is it</h3>
+                            but you do not feel like getting everyones information or uploading to google,
+                            docs then sharing it or set permissions, or you just share everyone wo have
+                            there own version.</h3>
+
+                            <h3>Benefits ? It is very easy to upload a file, share the alias name,
+                            download the file by simply pressing the get file button, provide th alias
+                            name to get the downloadable content, then press download, and there you go
+                            that easy.</h3>
 
                             <h2>Any bugs ?</h2>
                             <SendFeedBack />
