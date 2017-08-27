@@ -4,8 +4,9 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build:prod": "webpack -p && cp app/index.html dist",
     "build:dev": "webpack -d && cp app/index.html dist && webpack-dev-server --content-base app/ --inline --hot",
+    "deploy": "rm -rf dist && npm run build:prod && firebase deploy -p dist",
+    "build:prod": "webpack -p && cp app/index.html dist",
     "ping": "firbase-test.js"
   },
   "repository": {

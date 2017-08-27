@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import FileStorage from '../fileStorage';
 
 // components
+import SendFeedBack from './SendFeedBack';
 import UImessage from './uiMessage';
 import Download from './download';
 import Upload from './upload';
@@ -90,9 +91,26 @@ export default class App extends Component {
                         </h1>
                         <button className="btn btn-warning pull-right" onClick={ this.onPrompt.bind(this) }>Get File</button>
                     </div>
-                    { this.state.uiMessage ? <UImessage message={ this.state.uiMessage } /> : '' }
-                    <Upload fileObj={this.state.fileObj} uploadFile={ this.uploadFile.bind(this) } getFile={ this.getFile.bind(this) } setTime={ this.setTime.bind(this) } />
-                    { this.state.queryAlias ? <Download queryAlias={ this.state.queryAlias } /> : '' }
+                    { this.state.uiMessage ? <UImessage className='bin col-xs-4 col-sm-4 col-md-4 col-xs-offset-1' message={ this.state.uiMessage } /> : '' }
+                    <div className='col-xs-12 col-sm-12 col-md-12'>
+                        <Upload fileObj={this.state.fileObj} uploadFile={ this.uploadFile.bind(this) } getFile={ this.getFile.bind(this) } setTime={ this.setTime.bind(this) } />
+                        { this.state.queryAlias ? <Download queryAlias={ this.state.queryAlias } /> : '' }
+                        <div style={{ borderTop: '6px solid #fd6b2e' }} className='bin col-xs-6 col-sm-6 col-md-6 col-xs-offset-1'>
+                            <h3>This is zipshare, this is a website for people to share files,
+                            images, or anythin on your phone or latop over the interne for a
+                            certian amount of time.</h3>
+                            <h3>For example, Lets say if you want to share a file on your computer
+                            but you do not feel like getting everyones information, set permissions,
+                            or you just share everyone wo have there own version.</h3>
+                            <h3>Benefit, You its easy to uppload a file, wasy to download a file,
+                            just simply press the get file button, provide th alias name that is
+                            attached to the downloadable content, then press downlaod, and bam
+                            that is it</h3>
+
+                            <h2>Any bugs ?</h2>
+                            <SendFeedBack />
+                        </div>
+                    </div>
               </div>
           )
       }
